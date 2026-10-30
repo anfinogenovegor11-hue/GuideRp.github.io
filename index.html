@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GuideKemRp — Справочник УК РФ и КоАП для KemRP</title>
+<meta name="description" content="Полный справочник статей УК РФ и КоАП для игры Кемерово RP: 372 статьи, калькулятор наказаний, избранное и RP-шаблоны.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23d4af37' d='M12 2 1 7h3v2c0 .6.4 1 1 1h2c.6 0 1-.4 1-1V9h8v2c0 .6.4 1 1 1h2c.6 0 1-.4 1-1V9h3L12 2zM11 11v8H8c-.6 0-1 .4-1 1s.4 1 1 1h8c.6 0 1-.4 1-1s-.4-1-1-1h-3v-8h-2z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0d12;--bg2:#12151c;--bg3:#1a1e28;--line:#262c3a;--text:#eef1f6;--mut:#9aa3b5;--gold:#e9eaee;--gold2:#f2f3f5;--red:#e05c5c;--grn:#4fcf8a;--org:#f0a04a;--shadow:0 18px 50px rgba(0,0,0,.5)}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif}
+::selection{background:rgba(224,226,234,.3)}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:#2b3242;border-radius:6px}::-webkit-scrollbar-track{background:var(--bg)}
+a{color:inherit;text-decoration:none}
+.container{max-width:1180px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:100;background:rgba(11,13,18,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:26px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Inter',system-ui,sans-serif;letter-spacing:-.03em;font-size:21px;font-weight:700;letter-spacing:.4px}
+.logo svg{width:30px;height:30px}
+.logo b{color:var(--gold)}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{padding:8px 14px;border-radius:10px;color:var(--mut);font-size:14px;font-weight:600;transition:.2s}
+.nav-links a:hover{color:var(--text);background:var(--bg3)}
+.nav-links a.active{color:var(--gold)}
+.nav-cta{background:linear-gradient(135deg,var(--gold),#3d4048);color:#0a0b0d;padding:9px 18px;border-radius:10px;font-weight:700;font-size:14px;border:none}
+.nav-cta:hover{filter:brightness(1.1)}
+.fav-badge{background:var(--bg3);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:8px 12px;font-size:13px;font-weight:600;display:inline-flex;gap:6px;align-items:center;cursor:pointer;font-family:inherit}
+.fav-badge svg{width:15px;height:15px}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.burger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px}
+.hero{position:relative;overflow:hidden;padding:110px 0 90px}
+.hero-bg{position:absolute;inset:0;background:url('https://commons.wikimedia.org/wiki/Special:FilePath/3D%20Judges%20Gavel.jpg?width=1600') center 30%/cover no-repeat}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,18,.88),rgba(11,13,18,.94) 60%,var(--bg)),radial-gradient(ellipse 70% 60% at 20% 20%,rgba(224,226,234,.16),transparent 60%)}
+.hero-in{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(224,226,234,.4);background:rgba(224,226,234,.08);color:var(--gold2);padding:7px 16px;border-radius:100px;font-size:12.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.hero-badge i{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 10px var(--grn);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.hero h1{font-size:clamp(38px,5vw,58px);line-height:1.12;margin:22px 0 18px;font-weight:800}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,#ffffff,#e9eaee 45%,#7f8797);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:17.5px;max-width:540px;margin-bottom:30px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;border:none;font-family:inherit;transition:.25s}
+.btn-gold{background:linear-gradient(135deg,#f2f3f5,#a7abb4);color:#0a0b0d;box-shadow:0 8px 28px rgba(224,226,234,.28)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(224,226,234,.4)}
+.btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold2)}
+.stats{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;max-width:560px;background:rgba(18,21,28,.7)}
+.stat{flex:1;padding:16px 10px;text-align:center;border-right:1px solid var(--line)}
+.stat:last-child{border:none}
+.stat b{display:block;font-size:24px;color:var(--gold);font-family:'Inter',system-ui,sans-serif;letter-spacing:-.03em}
+.stat span{font-size:11.5px;color:var(--mut);letter-spacing:.4px;text-transform:uppercase}
+section{padding:84px 0}
+.sec-head{margin-bottom:44px;max-width:640px}
+.kicker{color:var(--gold);font-size:12.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.kicker::before{content:'';width:34px;height:1px;background:var(--gold)}
+.sec-head h2{font-size:clamp(28px,3.6vw,40px);margin:12px 0 10px}
+.sec-head p{color:var(--mut);font-size:16px}
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;margin-bottom:10px}
+.about-img{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.about-img img{width:100%;display:block;aspect-ratio:4/4.6;object-fit:cover;filter:saturate(.85)}
+.about-img .quote{position:absolute;bottom:0;left:0;right:0;padding:22px;background:linear-gradient(transparent,rgba(11,13,18,.95));font-family:'Inter',system-ui,sans-serif;letter-spacing:-.03em;font-size:17px;color:#f3e6bd;font-style:italic}
+.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.feat{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.3s}
+.feat:hover{transform:translateY(-4px);border-color:rgba(224,226,234,.45);box-shadow:var(--shadow)}
+.feat .ic{width:44px;height:44px;border-radius:12px;background:rgba(224,226,234,.1);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.feat .ic svg{width:22px;height:22px}
+.feat h3{font-size:17px;margin-bottom:8px}
+.feat p{color:var(--mut);font-size:13.5px}
+.tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.search{flex:1;min-width:240px;position:relative}
+.search input{width:100%;padding:13px 16px 13px 44px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;color:var(--text);font-size:14.5px;font-family:inherit;outline:none;transition:.2s}
+.search input:focus{border-color:var(--gold)}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--mut)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:11px 18px;border-radius:12px;background:var(--bg2);border:1px solid var(--line);color:var(--mut);font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.chip:hover{color:var(--text)}
+.chip.active{background:rgba(224,226,234,.12);border-color:var(--gold);color:var(--gold2)}
+select.cat{padding:12px 14px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;color:var(--text);font-family:inherit;font-size:13.5px;outline:none;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:20px;cursor:pointer;transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:rgba(224,226,234,.45);box-shadow:var(--shadow)}
+.card .top{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-right:40px}
+.num{background:rgba(224,226,234,.12);color:var(--gold2);border:1px solid rgba(224,226,234,.3);padding:3px 10px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap}
+.card h3{font-size:15.5px;line-height:1.35;margin-bottom:12px;min-height:42px}
+.card .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sev{font-size:10.5px;font-weight:800;letter-spacing:.5px;padding:3px 10px;border-radius:20px;text-transform:uppercase}
+.sev.severe{background:rgba(224,92,92,.14);color:var(--red)}
+.sev.medium{background:rgba(240,160,74,.14);color:var(--org)}
+.sev.minor{background:rgba(79,207,138,.14);color:var(--grn)}
+.pen{font-size:12.5px;color:var(--mut)}
+.star{position:absolute;top:14px;right:14px;background:var(--bg3);border:1px solid var(--line);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;color:var(--mut)}
+.star svg{width:16px;height:16px}
+.star:hover{border-color:var(--gold);color:var(--gold)}
+.star.on{color:var(--gold);border-color:var(--gold);background:rgba(224,226,234,.14)}
+.lock-tag{position:absolute;bottom:14px;right:14px;font-size:11px;font-weight:700;color:var(--mut);display:flex;gap:5px;align-items:center}
+.lock-tag svg{width:13px;height:13px;color:var(--gold)}
+.demo-tag{position:absolute;bottom:14px;right:14px;font-size:11px;font-weight:700;color:var(--grn)}
+.more-wrap{text-align:center;margin-top:30px}
+.calc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:start}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px}
+.panel h3{font-size:18px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.panel h3 svg{width:19px;height:19px;color:var(--gold)}
+.circ-list{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto;padding-right:6px}
+.circ{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--line);border-radius:11px;background:var(--bg3);cursor:pointer;font-size:13.5px;transition:.2s;user-select:none}
+.circ:hover{border-color:#3a4256}
+.circ .pc{font-weight:800;white-space:nowrap}
+.circ.mit .pc{color:var(--grn)}
+.circ.agg .pc{color:var(--red)}
+.circ.on.mit{border-color:var(--grn);background:rgba(79,207,138,.08)}
+.circ.on.agg{border-color:var(--red);background:rgba(224,92,92,.08)}
+.circ-head{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);margin:14px 0 8px}
+.result{background:linear-gradient(160deg,rgba(224,226,234,.09),rgba(18,21,28,.4));border:1px solid rgba(224,226,234,.3);border-radius:18px;padding:26px}
+.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px;color:var(--mut);gap:10px}
+.row b{color:var(--text);text-align:right}
+.verdict{margin:18px 0;padding:16px;background:rgba(11,13,18,.6);border-left:3px solid var(--gold);border-radius:10px;font-family:'JetBrains Mono',monospace,monospace;font-size:12.5px;line-height:1.7;white-space:pre-wrap;color:#dfe5ee}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.checklist{display:grid;gap:10px}
+.check{display:flex;gap:12px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.check svg{width:18px;height:18px;color:var(--grn);flex-shrink:0;margin-top:2px}
+.check span{font-size:14.5px}
+.check b{color:var(--gold2)}
+.steps{display:grid;gap:14px;margin-top:8px}
+.step{display:flex;gap:16px;align-items:flex-start}
+.step .no{font-family:'Inter',system-ui,sans-serif;letter-spacing:-.03em;font-size:26px;color:var(--gold);min-width:44px;font-weight:700}
+.step h4{font-size:15.5px;margin-bottom:4px}
+.step p{color:var(--mut);font-size:13.5px}
+.why-img{border-radius:18px;overflow:hidden;border:1px solid var(--line);margin-top:26px}
+.why-img img{width:100%;display:block;aspect-ratio:16/8;object-fit:cover}
+.tariff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.tariff{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;transition:.3s}
+.tariff:hover{transform:translateY(-6px);border-color:rgba(224,226,234,.5);box-shadow:var(--shadow)}
+.tariff.hot{border-color:var(--gold);background:linear-gradient(170deg,rgba(224,226,234,.1),var(--bg2) 55%)}
+.hot-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f2f3f5,#a7abb4);color:#0a0b0d;font-size:11.5px;font-weight:800;letter-spacing:1px;padding:6px 16px;border-radius:100px;text-transform:uppercase;white-space:nowrap}
+.tariff h3{font-size:21px;margin-bottom:6px}
+.tariff .desc{color:var(--mut);font-size:13.5px;min-height:40px}
+.price{font-family:'Inter',system-ui,sans-serif;letter-spacing:-.03em;font-size:42px;color:var(--gold);margin:16px 0 4px}
+.price small{font-size:14px;color:var(--mut);font-family:'Inter',sans-serif}
+.tariff ul{list-style:none;display:grid;gap:10px;margin:18px 0 26px;flex:1}
+.tariff li{display:flex;gap:10px;font-size:14px;color:#cfd6e2}
+.tariff li svg{width:17px;height:17px;color:var(--gold);flex-shrink:0;margin-top:2px}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);font-size:13.5px}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot a{color:var(--gold2)}
+.overlay{position:fixed;inset:0;background:rgba(5,6,9,.78);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--line);border-radius:20px;width:100%;max-width:680px;max-height:88vh;overflow-y:auto;padding:28px;position:relative;animation:mup .25s ease}
+@keyframes mup{from{opacity:0;transform:translateY(18px)}to{opacity:1}}
+.xbtn{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--bg3);border:1px solid var(--line);color:var(--mut);font-size:17px;cursor:pointer;transition:.2s;font-family:inherit}
+.xbtn:hover{color:var(--text);border-color:#3a4256}
+.mtabs{display:flex;gap:7px;overflow-x:auto;margin:16px 0;scrollbar-width:none}
+.mtabs::-webkit-scrollbar{display:none}
+.mtab{padding:8px 15px;border-radius:100px;background:var(--bg3);border:1px solid var(--line);color:var(--mut);font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
+.mtab.active{background:rgba(224,226,234,.13);border-color:var(--gold);color:var(--gold2)}
+.msec{display:none}.msec.on{display:block}
+.mtext{color:#cfd6e2;font-size:14px;white-space:pre-wrap}
+.rp{background:var(--bg3);border-left:3px solid var(--gold);border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace,monospace;font-size:12.5px;white-space:pre-wrap;color:#dfe5ee}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{padding:4px 12px;border:1px solid var(--line);background:var(--bg3);border-radius:20px;font-size:12px;color:var(--mut);cursor:pointer}
+.tag:hover{border-color:var(--gold);color:var(--gold2)}
+.rel{display:block;padding:10px 14px;background:var(--bg3);border:1px solid var(--line);border-radius:10px;margin-top:8px;font-size:13px;color:var(--mut);cursor:pointer}
+.rel:hover{border-color:var(--gold);color:var(--gold2)}
+.locked-note{margin-top:6px;padding:16px;border:1px dashed rgba(224,226,234,.5);border-radius:12px;text-align:center;color:var(--mut);font-size:13.5px}
+.locked-note b{color:var(--gold2)}
+.amount{font-family:'Inter',system-ui,sans-serif;letter-spacing:-.03em;font-size:44px;color:var(--gold);text-align:center;padding:10px 0 18px}
+.pay-step{display:flex;gap:14px;margin:14px 0}
+.pay-step .n{width:30px;height:30px;border-radius:50%;background:rgba(224,226,234,.12);border:1px solid rgba(224,226,234,.4);color:var(--gold2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.pay-step p{font-size:14px;color:#cfd6e2}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--bg3);border:1px solid var(--gold);padding:13px 22px;border-radius:12px;font-size:14px;z-index:300;opacity:0;transition:.35s;pointer-events:none;box-shadow:var(--shadow)}
+.toast.show{transform:translateX(-50%);opacity:1}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.vis{opacity:1;transform:none}
+@media (max-width:960px){
+ .hero-in,.about-grid,.calc-grid,.why-grid{grid-template-columns:1fr}
+ .grid,.tariff-grid{grid-template-columns:1fr 1fr}
+ .feat-grid{grid-template-columns:1fr}
+ .hero{padding:70px 0 60px}
+}
+@media (max-width:620px){
+ .grid,.tariff-grid{grid-template-columns:1fr}
+ .nav-links{position:fixed;top:68px;left:0;right:0;background:var(--bg2);flex-direction:column;padding:16px;border-bottom:1px solid var(--line);display:none;z-index:99}
+ .nav-links.open{display:flex}
+ .burger{display:block;margin-left:auto}
+ .nav-cta{display:none}
+ .stats{flex-wrap:wrap}
+ .stat{min-width:46%}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+.cons{margin:14px 0 6px;border-top:1px dashed var(--line);padding-top:10px}
+.cons div{font-size:12.5px;color:var(--mut);padding:3px 0;opacity:.85}
+.tariff .cons div{color:rgba(230,57,70,.75)}
+
+/* ==== Промокод ==== */
+.promo-box{border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0 14px;background:var(--bg2)}
+.promo-title{font-weight:700;color:var(--gold2);font-size:14px;margin-bottom:6px;letter-spacing:.4px;text-transform:uppercase}
+.promo-hint{color:var(--mut);font-size:12.5px;line-height:1.5;margin-bottom:10px}
+.promo-row{display:flex;gap:8px}
+.promo-input{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;font-family:inherit}
+.promo-input:focus{border-color:var(--gold)}
+.promo-msg{min-height:18px;font-size:12.5px;margin-top:8px;line-height:1.4}
+.promo-msg.ok{color:var(--grn)}
+.promo-msg.err{color:var(--red)}
+</style>
+<style>
+/* ===== ProjectReal polish + User System ===== */
+:root{--bg:#050506;--bg2:#0e0f13;--bg3:#16171c;--line:#24262e;--text:#f2f3f5;--mut:#8b8f98;--gold:#e9eaee;--gold2:#f2f3f5}
+body{background:#050506;color:var(--text)}
+h1,h2,h3,.serif{font-family:'Inter',system-ui,sans-serif;letter-spacing:-.03em}
+.hero-bg,.hero{background:radial-gradient(1200px 640px at 82% -12%,rgba(96,120,170,.10),transparent 62%),radial-gradient(900px 560px at -10% 18%,rgba(70,88,130,.08),transparent 60%),#050506}
+.hero .hero-in{grid-template-columns:1fr;max-width:860px}
+.btn,.nav-cta,.chip,.filter-chip,.mtab,.fav-badge{border-radius:999px}
+.btn-gold,.nav-cta{background:#f2f3f5;color:#0a0b0d;box-shadow:0 8px 28px rgba(255,255,255,.14)}
+.btn-gold:hover,.nav-cta:hover{box-shadow:0 12px 40px rgba(255,255,255,.22);transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tariff,.card,.feat,.panel{background:rgba(18,19,25,.55);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 18px 50px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.05)}
+.tariff{border-radius:26px}.card,.feat{border-radius:22px}
+.tariff:hover,.card:hover,.feat:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2);box-shadow:0 26px 70px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06)}
+.tariff.featured{border-color:rgba(255,255,255,.28)}
+#about img,#payhow img{filter:grayscale(.65) brightness(.62)}
+::selection{background:rgba(255,255,255,.22)}
+::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:#08080a}::-webkit-scrollbar-thumb{background:#2b2d35;border-radius:9px}
+.user-badge{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s;font-family:inherit;flex-shrink:0}
+.user-badge:hover{border-color:rgba(255,255,255,.3)}
+.user-badge svg{width:19px;height:19px}
+.user-ava{width:100%;height:100%;border-radius:50%;background:#f2f3f5;color:#0a0b0d;font-weight:800;font-size:15px;display:inline-flex;align-items:center;justify-content:center}
+.auth-field{margin-bottom:12px}
+.auth-field label{display:block;font-size:11.5px;font-weight:700;color:var(--mut);letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px}
+.auth-field input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:var(--text);font-size:15px;outline:none;font-family:inherit;transition:.2s;box-sizing:border-box}
+.auth-field input:focus{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.06)}
+.auth-err{color:#ff8b8b;font-size:13px;min-height:18px;margin:2px 0 4px}
+.auth-note{color:var(--mut);font-size:12.5px;margin-top:12px;line-height:1.55}
+.auth-submit{width:100%;justify-content:center;margin-top:6px}
+.auth-logo{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.auth-sub{color:var(--mut);font-size:13.5px;margin:4px 0 14px}
+.auth-tabs{display:flex;gap:8px;margin-bottom:14px}
+.auth-tabs .mtab{flex:1;display:flex;justify-content:center}
+.cab-balance{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:4px 0 16px}
+.cab-balance-label{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px;font-weight:700}
+.cab-balance-val{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-top:2px}
+.cab-section{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.cab-section h4{margin:0 0 10px;font-size:14px;font-weight:800;letter-spacing:-.01em}
+.cab-row{display:flex;gap:8px;margin-bottom:8px}
+.cab-row input{flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:11px 13px;color:var(--text);font-size:14px;outline:none;font-family:inherit;transition:.2s}
+.cab-row input:focus{border-color:rgba(255,255,255,.32)}
+.cab-row .btn{padding:10px 14px;font-size:13px;white-space:nowrap}
+.cab-promos{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.promo-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12.5px;color:var(--text)}
+.promo-chip.used{opacity:.55}
+.promo-chip .copy{cursor:pointer;color:var(--mut);font-weight:700}
+.promo-chip .copy:hover{color:var(--text)}
+.topup-note{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.6;color:var(--mut);margin:12px 0}
+.topup-note b{color:var(--text)}
+.adm-out{margin-top:10px}
+.adm-promo{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px}
+.adm-promo code{font-family:ui-monospace,Menlo,monospace;font-size:14px;color:var(--text)}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e9eaee" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M5 21h14M12 5 4 9h16l-8-4z"/><path d="M6 9v6c0 1 4 1 4 0V9M14 9v6c0 1 4 1 4 0V9" stroke-linejoin="round"/></svg>
+      Guide<b>KemRp</b>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" data-spy="home">Главная</a>
+      <a href="#about" data-spy="about">О справочнике</a>
+      <a href="#catalog" data-spy="catalog">Справочник</a>
+      <a href="#calc" data-spy="calc">Калькулятор</a>
+      <a href="#tariffs" data-spy="tariffs">Тарифы</a>
+    </nav>
+    <button class="fav-badge" onclick="openFav()" title="Избранное">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e9eaee" stroke-width="1.8"><path d="m12 3 2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7L12 3z" stroke-linejoin="round"/></svg>
+      <span id="favCount">0</span>
+    </button>
+    <button class="user-badge" id="userBtn" aria-label="Вход / регистрация" title="Вход / регистрация"><svg viewBox="0 0 24 24" fill="none" stroke="#c2c6d0" stroke-width="1.8"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.4-5.4 7-5.4s7 1.8 7 5.4" stroke-linecap="round"/></svg></button>
+      <a class="nav-cta" href="#tariffs">Купить доступ</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="container hero-in">
+    <div>
+      <span class="hero-badge"><i></i> Кемерово RP · работает 24/7</span>
+      <h1>Справочник правонарушений <em>УК РФ и КоАП</em></h1>
+      <p>Все статьи игрового кодекса Кемерово RP в одном месте: полные квалификации, готовые RP-сценарии для /me и /do, калькулятор наказаний и избранное. Открывается за секунды — в удобном приложении.</p>
+      <div class="hero-btns">
+        <a class="btn btn-gold" href="#catalog">Открыть демо-версию</a>
+        <a class="btn btn-ghost" href="#tariffs">Смотреть тарифы</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>372</b><span>статьи</span></div>
+        <div class="stat"><b>2</b><span>кодекса</span></div>
+        <div class="stat"><b>20</b><span>обстоятельств</span></div>
+        <div class="stat"><b>12</b><span>категорий</span></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="sec-head reveal"><span class="kicker">О проекте</span><h2>Что такое GuideKemRp</h2>
+      <p>Профессиональный справочник для сотрудников фракций Кемерово RP. Игровой кодекс переписан в удобный веб-формат: поиск, фильтры, калькулятор и готовые RP-сценарии — чтобы вы тратили секунды, а не минуты на поиск нужной статьи.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Themis.jpg?width=800" alt="Статуя Фемиды" onerror="this.style.display='none'">
+        <div class="quote">«Закон одинаков для всех — важно лишь быстро найти нужную статью»</div>
+      </div>
+      <div>
+        <div class="feat-grid">
+          <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#e9eaee" stroke-width="1.8"><path d="M4 19V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 0-2 2z" stroke-linejoin="round"/><path d="M19 17H6a2 2 0 0 0-2 2"/></svg></div><h3>Полная база</h3><p>Все статьи УК РФ и КоАП сервера — с наказаниями и категориями тяжести.</p></div>
+          <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#e9eaee" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><h3>Мгновенный поиск</h3><p>По номеру статьи, названию и тексту описания. Фильтры по категориям и кодексам.</p></div>
+          <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#e9eaee" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></div><h3>Калькулятор</h3><p>20 смягчающих и отягчающих обстоятельств — итоговый срок считается автоматически.</p></div>
+          <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#e9eaee" stroke-width="1.8"><path d="m12 3 2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7L12 3z" stroke-linejoin="round"/></svg></div><h3>Избранное</h3><p>Помечайте нужные статьи звёздочкой — они всегда под рукой при следующем входе.</p></div>
+          <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#e9eaee" stroke-width="1.8"><path d="M8 9h8M8 13h5M21 12a9 9 0 1 1-4-7.5L21 3z" stroke-linejoin="round"/></svg></div><h3>RP-сценарии</h3><p>Готовые действия /me и /do к каждой статье — скопируйте и вставьте в чат.</p></div>
+          <div class="feat reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#e9eaee" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" stroke-linejoin="round"/></svg></div><h3>Быстрые обновления</h3><p>База синхронизируется с изменениями сервера — актуальные редакции статей.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="catalog" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head reveal"><span class="kicker">Демо-версия</span><h2>Справочник статей</h2>
+      <p>7 статей открыты бесплатно в полном виде, ещё 6 — под замком. Полная версия справочника открывает все статьи без ограничений.</p>
+    </div>
+    <div class="tools reveal">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="q" type="text" placeholder="Поиск: номер или название статьи…">
+      </div>
+      <select class="cat" id="catSel"><option value="all">Все категории</option></select>
+    </div>
+    <div class="chips reveal" id="codeChips">
+      <button class="chip active" data-code="all">Все</button>
+      <button class="chip" data-code="uk">УК РФ</button>
+      <button class="chip" data-code="koap">КоАП РФ</button>
+      <button class="chip" data-code="fav">Избранное</button>
+    </div>
+    <div class="grid reveal" id="cards" style="margin-top:22px"></div>
+    <div class="more-wrap"><button class="btn btn-ghost" id="moreBtn">Показать ещё</button></div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="container">
+    <div class="sec-head reveal"><span class="kicker">Инструмент</span><h2>Калькулятор наказаний</h2>
+      <p>Выберите статью и обстоятельства — калькулятор применит игровую формулу и покажет итоговый срок. Готовый вердикт копируется одной кнопкой.</p>
+    </div>
+    <div class="calc-grid">
+      <div class="panel reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg> Статья и обстоятельства</h3>
+        <select class="cat" id="calcArt" style="width:100%;margin-bottom:6px"><option value="">— выберите статью —</option></select>
+        <div class="circ-head">Смягчающие обстоятельства</div>
+        <div class="circ-list" id="mitList" style="max-height:250px"></div>
+        <div class="circ-head">Отягчающие обстоятельства</div>
+        <div class="circ-list" id="aggList" style="max-height:250px"></div>
+        <button class="btn btn-ghost" id="calcReset" style="margin-top:16px">Сбросить все</button>
+      </div>
+      <div class="result reveal">
+        <h3 class="serif" style="font-size:20px;margin-bottom:14px">Протокол</h3>
+        <div class="row"><span>Статья</span><b id="rArt">— не выбрана —</b></div>
+        <div class="row"><span>Базовое наказание</span><b id="rBase">—</b></div>
+        <div class="row"><span>Смягчающих / отягчающих</span><b id="rCnt">0 / 0</b></div>
+        <div class="row" style="border:none"><span>Суммарная поправка</span><b id="rPerc">0%</b></div>
+        <div class="verdict" id="verdict">Статьи не выбраны в калькуляторе</div>
+        <button class="btn btn-gold" id="copyBtn" style="width:100%;justify-content:center">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          Скопировать вердикт
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head reveal"><span class="kicker">Полная версия</span><h2>Почему стоит купить</h2>
+      <p>Демо показывает лишь верхушку. Полная версия открывает весь справочник и все инструменты без ограничений.</p>
+    </div>
+    <div class="why-grid">
+      <div class="reveal">
+        <div class="checklist">
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Все <b>372 статьи</b> УК РФ и КоАП без замков и ограничений</span></div>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Поиск по номеру, названию и тексту + фильтры по <b>12 категориям</b></span></div>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Калькулятор на <b>20 обстоятельствах</b> с игровой формулой и копированием вердикта</span></div>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>RP-сценарии <b>/me и /do</b> к каждой статье и квалификация составов</span></div>
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Избранное и обновления базы при изменениях кодекса сервера</span></div>
+        </div>
+        <div class="why-img"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Handcuffs%20(2009).jpg?width=1000" alt="Наручники" onerror="this.parentElement.classList.add('noimg');this.remove()"></div>
+      </div>
+      <div class="reveal">
+        <h3 class="serif" style="font-size:22px;margin-bottom:18px">Как получить доступ</h3>
+        <div class="steps">
+          <div class="step"><div class="no">01</div><div><h4>Выберите тариф</h4><p>Лёгкий рпшник — 50 ₽/мес, Фракционный слуга — 150 ₽/мес, Глава правосудия — 500 ₽ навсегда.</p></div></div>
+          <div class="step"><div class="no">02</div><div><h4>Оплатите через ЮMoney</h4><p>Кнопка открывает безопасный перевод с уже подставленной суммой.</p></div></div>
+          <div class="step"><div class="no">03</div><div><h4>Отправьте чек</h4><p>Скриншот платежа — в Telegram владельцу для выдачи доступа.</p></div></div>
+          <div class="step"><div class="no">04</div><div><h4>Получите доступ</h4><p>Полная версия активируется в течение короткого времени после проверки чека.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tariffs">
+  <div class="container">
+    <div class="sec-head reveal"><span class="kicker">Тарифы</span><h2>Выберите свой тариф</h2>
+      <p>Оплата переводом на ЮMoney. После платежа отправьте чек в Telegram — доступ выдаётся вручную в кратчайшие сроки.</p>
+    </div>
+    <div class="tariff-grid">
+      <div class="tariff reveal">
+        <h3>Лёгкий рпшник</h3><div class="desc">Для начинающих рпшников и игроков проекта.</div>
+        <div class="price">50 ₽<small> / месяц</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>100 статей УК и 50 статей КоАП</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Поиск и фильтры по категориям</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Избранные статьи</li>
+        </ul>
+        <div class="cons">
+          <div>✕ Без моментальной поддержки</div>
+          <div>✕ Без быстрых обновлений</div>
+          <div>✕ Не все статьи</div>
+          <div>✕ Без калькулятора</div>
+          <div>✕ Без обстоятельств</div>
+          <div>✕ Без заметок</div>
+        </div>
+        <button class="btn btn-ghost" onclick="openPay('Лёгкий рпшник',50)">Выбрать план</button>
+      </div>
+      <div class="tariff hot reveal">
+        <div class="hot-badge">Выбор фракций</div>
+        <h3>Фракционный слуга</h3><div class="desc">Для продвинутых и крутых фракций, где РП должно быть на высоте.</div>
+        <div class="price">150 ₽<small> / месяц</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Все статьи УК (242) и КоАП (130)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Моментальная поддержка и обновления</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Обстоятельства</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Заметки</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Калькулятор с RP-процессами и протоколом</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Закрытый Telegram-канал про обновления</li>
+        </ul>
+        <button class="btn btn-gold" onclick="openPay('Фракционный слуга',150)">Выбрать план</button>
+      </div>
+      <div class="tariff reveal">
+        <h3>Глава правосудия</h3><div class="desc">Для профи и лучших фракций, где нельзя терять ни минуты RP-процесса.</div>
+        <div class="price">500 ₽<small> / навсегда</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Всё из тарифа «Фракционный слуга»</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Прямой доступ к разработчикам и поддержке</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 13 4 4L19 7"/></svg>Моментальные обновления в первую очередь</li>
+        </ul>
+        <button class="btn btn-ghost" onclick="openPay('Глава правосудия',500)">Выбрать план</button>
+      </div>
+    </div>
+  </div>
+    </section>
+
+<footer>
+  <div class="container foot">
+    <div>© 2025 GuideKemRp · Справочник статей для игрового проекта Кемерово RP (Roblox)</div>
+    <div>Вопросы и доступ: <a href="https://t.me/Weorest" target="_blank" rel="noopener">@Weorest</a> в Telegram</div>
+  </div>
+  <div class="container" style="margin-top:14px;font-size:12px;color:#6b7385">Фан-проект для ролевой игры. Не связан с реальными правоохранительными органами и судебной системой РФ.</div>
+</footer>
+
+<div class="overlay" id="artOverlay">
+  <div class="modal" id="artModal">
+    <button class="xbtn" onclick="closeModal('artOverlay')" aria-label="Закрыть">✕</button>
+    <div id="mHead"></div>
+    <div class="mtabs" id="mTabs"></div>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<div class="overlay" id="payOverlay">
+  <div class="modal" style="max-width:460px">
+    <button class="xbtn" onclick="closeModal('payOverlay')" aria-label="Закрыть">✕</button>
+    <h3 class="serif" style="font-size:24px">Оформление подписки</h3>
+    <p style="color:var(--mut);font-size:14px;margin-top:4px">Тариф: <b id="payName" style="color:var(--gold2)">—</b></p>
+    <div class="amount" id="payAmount">0 ₽</div>
+    <div class="promo-box">
+      <div class="promo-title">Промокод</div>
+      <div class="promo-hint">У вас есть промокод из рук разработчика? Введите его ниже. Помните: промокод одноразовый и действует одну неделю на одну покупку. После применения сумма понизится — размер скидки появится под полем.</div>
+      <div class="promo-row">
+        <input type="text" id="promoInput" class="promo-input" placeholder="KEM-RP-GUIDE_XXXXXXXXX" autocomplete="off">
+        <button class="btn btn-ghost" style="padding:10px 16px;white-space:nowrap" onclick="applyPromo()">Применить</button>
+      </div>
+      <div class="promo-msg" id="promoMsg"></div>
+    </div>
+    <div class="pay-step"><div class="n">1</div><p>Перейдите по кнопке и совершите безопасный перевод на точную сумму тарифа через <b>ЮMoney</b>.</p></div>
+    <a class="btn btn-gold" id="payLink" href="#" target="_blank" rel="noopener" style="width:100%;justify-content:center;margin:6px 0 14px">Перевести через ЮMoney</a>
+    <div class="pay-step"><div class="n">2</div><p>Отправьте скриншот платежа вместе с вашим промокодом (для подтверждения скидки) владельцу в Telegram.</p></div>
+    <a class="btn btn-ghost" href="https://t.me/Weorest" target="_blank" rel="noopener" style="width:100%;justify-content:center">Отправить чек в Telegram (@Weorest)</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+'use strict';
+/* ===== ЗАМЕНИТЕ номер кошелька на свой реальный ЮMoney-кошелёк ===== */
+const PAY_WALLET = '4100118560304826';
+
+const DB = [{"n": "105", "t": "Убийство", "p": "6-15 лет л/с", "c": "severe", "cat": "personal", "d": "Умышленное причинение смерти другому человеку.", "q": "• Из корыстных побуждений\n• С особой жестокостью\n• Общеопасным способом", "r": "/me достал оружие и произвёл выстрелы.\n/do На теле огнестрельные ранения.", "tg": ["#тяжкое", "#особо_тяжкое"], "rel": ["106", "107", "109"]}, {"n": "158", "t": "Кража", "p": "до 6 лет л/с", "c": "medium", "cat": "property", "d": "Тайное хищение чужого имущества.", "q": "• Тайное изъятие\n• Без насилия", "r": "/me незаметно вытащил кошелёк.\n/do Пропажа обнаружена.", "tg": ["#имущество", "#кража"], "rel": ["159", "161"]}, {"n": "161", "t": "Грабеж", "p": "до 7 лет л/с", "c": "severe", "cat": "property", "d": "Открытое хищение имущества.", "q": "• Открытое изъятие\n• В присутствии владельца", "r": "/me выхватил сумку и побежал.\n/do Владелец видел лицо.", "tg": ["#имущество", "#грабеж"], "rel": ["158", "162"]}, {"n": "163", "t": "Вымогательство", "p": "до 7 лет л/с", "c": "severe", "cat": "property", "d": "Требование имущества под угрозой.", "q": "• Требование\n• Угроза", "r": "/me потребовал деньги.\n/do Жертва напугана.", "tg": ["#имущество", "#вымогательство"], "rel": ["162"]}, {"n": "228", "t": "Незаконные приобретение, хранение, перевозка наркотических средств", "p": "до 10 лет л/с", "c": "severe", "cat": "drugs", "d": "Незаконные приобретение, хранение, перевозка наркотических средств без цели сбыта.", "q": "• Хранение\n• Без сбыта", "r": "/me задержан с наркотиками.\n/do Обнаружено 5 грамм.", "tg": ["#наркотики", "#незаконный_оборот"], "rel": ["228.1"]}, {"n": "264", "t": "Нарушение ПДД, повлекшее смерть человека", "p": "до 7 лет л/с", "c": "severe", "cat": "traffic", "d": "Нарушение ПДД, повлекшее смерть человека.", "q": "• Нарушение ПДД\n• Смерть", "r": "/me выехал на встречную.\n/do ДТП со смертельным исходом.", "tg": ["#ПДД", "#тяжкое"], "rel": ["12.8", "12.26"]}, {"n": "222", "t": "Незаконные приобретение, передача, сбыт, хранение, перевозка или ношение оружия", "p": "до 8 лет л/с", "c": "severe", "cat": "weapons", "d": "Незаконное приобретение, передача, сбыт, хранение, перевозка или ношение огнестрельного оружия, его основных частей, боеприпасов, взрывчатых веществ и взрывных устройств.", "q": "• Незаконное приобретение\n• Незаконное хранение\n• Незаконная перевозка\n• Незаконное ношение\n• Сбыт оружия", "r": "/me достал из-за пазухи пистолет.\n/do Оружие не зарегистрировано, нарезное.", "tg": ["#оружие", "#незаконный_оборот", "#тяжкое"], "rel": ["223", "226"]}, {"n": "6.1.1", "t": "Побои", "p": "5000-30000 руб", "c": "minor", "cat": "admin", "d": "Нанесение побоев, причинивших физическую боль.", "q": "• Физическая боль\n• Отсутствие вреда", "r": "/me нанёс побои.\n/do Следы побоев.", "tg": ["#административное", "#побои"], "rel": ["116"]}, {"n": "12.8", "t": "Управление ТС в состоянии опьянения", "p": "30000-50000 руб / лишение прав", "c": "medium", "cat": "traffic", "d": "Управление ТС лицом в состоянии опьянения.", "q": "• Алкогольное опьянение\n• Наркотическое опьянение", "r": "/me остановлен с признаками опьянения.\n/do Тест показал 0.8 промилле.", "tg": ["#ПДД", "#алкоголь"], "rel": ["12.26", "264.1"]}, {"n": "12.26", "t": "Отказ от освидетельствования", "p": "30000-50000 руб / лишение прав", "c": "medium", "cat": "traffic", "d": "Отказ от медицинского освидетельствования.", "q": "• Отказ\n• Приравнивается к опьянению", "r": "/me отказался от теста.\n/do Отказ зафиксирован.", "tg": ["#ПДД", "#алкоголь"], "rel": ["12.8"]}, {"n": "19.3", "t": "Неподчинение полиции", "p": "2000-4000 руб / арест", "c": "medium", "cat": "admin", "d": "Неповиновение законному требованию сотрудника полиции.", "q": "• Отказ\n• Воспрепятствование", "r": "/me отказался показать документы.\n/do Требование законное.", "tg": ["#административное", "#сотрудники"], "rel": ["19.4"]}, {"n": "20.1", "t": "Мелкое хулиганство", "p": "500-1000 руб / арест", "c": "minor", "cat": "admin", "d": "Мелкое хулиганство — нарушение общественного порядка.", "q": "• Нецензурная брань\n• Публичное", "r": "/me ругался матом в парке.\n/do Нарушение зафиксировано.", "tg": ["#административное", "#хулиганство"], "rel": ["213"]}, {"n": "213", "t": "Хулиганство", "p": "до 5 лет л/с", "c": "medium", "cat": "public", "d": "Хулиганство — преступление против общественной безопасности.", "q": "• Общественная опасность\n• Нарушение безопасности", "r": "/me совершил действие.\n/do Последствия зафиксированы.", "tg": ["#общественный"], "rel": []}];
+const CIRC = {"mitigating": [{"id": "mit1", "label": "Явка с повинной", "perc": -30}, {"id": "mit2", "label": "Помощь потерпевшему", "perc": -20}, {"id": "mit3", "label": "Несовершеннолетие", "perc": -40}, {"id": "mit4", "label": "Беременность", "perc": -25}], "aggravating": [{"id": "agg1", "label": "Особая жестокость", "perc": 50}, {"id": "agg2", "label": "Общеопасный способ", "perc": 40}, {"id": "agg3", "label": "Корыстные побуждения", "perc": 30}, {"id": "agg4", "label": "По найму", "perc": 25}]};;
+const CAT = {"personal": "Против личности", "property": "Имущественные", "economic": "Экономические", "public": "Общественная безопасность", "drugs": "Наркотики", "ecology": "Экологические", "traffic": "ПДД", "cyber": "Киберпреступность", "official": "Должностные", "justice": "Правосудие", "admin": "Административные", "weapons": "Оружие"};
+const SEV = {"severe": "Тяжкое", "medium": "Средней тяжести", "minor": "Небольшой тяжести"};
+const DEMO = ['105','158','161','222','12.8','20.1','6.1.1'];
+
+const byNum = {}; DB.forEach(a => byNum[a.n] = a);
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+let fav = [];
+try { fav = JSON.parse(localStorage.getItem('gk_fav') || '[]'); } catch(e) {}
+const saveFav = () => { try { localStorage.setItem('gk_fav', JSON.stringify(fav)); } catch(e) {} };
+const isFav = n => fav.includes(n);
+function toggleFav(n) { fav = isFav(n) ? fav.filter(x => x !== n) : fav.concat(n); saveFav(); updateFavBadge(); }
+function updateFavBadge() { const el = $('#favCount'); if (el) el.textContent = fav.length; }
+
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+function copyText(text) {
+  const done = ok => toast(ok ? 'Скопировано в буфер обмена' : 'Не удалось скопировать');
+  function fallback() {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      const ok = document.execCommand('copy');
+      ta.remove(); return ok;
+    } catch(e) { return false; }
+  }
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => done(true)).catch(() => done(fallback()));
+  } else done(fallback());
+}
+
+let codeTab = 'all', catSel = 'all', query = '', shown = 24;
+
+function fillCatSelect() {
+  const present = new Set(DB.map(a => a.cat));
+  const sel = $('#catSel');
+  Object.keys(CAT).forEach(k => { if (present.has(k)) sel.insertAdjacentHTML('beforeend', `<option value="${k}">${CAT[k]}</option>`); });
+}
+
+function filtered() {
+  const q = query.trim().toLowerCase();
+  return DB.filter(a => {
+    if (codeTab === 'uk' && a.n.includes('.')) return false;
+    if (codeTab === 'koap' && !a.n.includes('.')) return false;
+    if (codeTab === 'fav' && !isFav(a.n)) return false;
+    if (catSel !== 'all' && a.cat !== catSel) return false;
+    if (q && !(a.n.toLowerCase().includes(q) || a.t.toLowerCase().includes(q) || a.d.toLowerCase().includes(q))) return false;
+    return true;
+  });
+}
+
+function cardHtml(a) {
+  const demo = DEMO.includes(a.n);
+  return `<article class="card" data-num="${a.n}" onclick="openArticle('${a.n}')">
+    <button class="star ${isFav(a.n) ? 'on' : ''}" data-fav="${a.n}" onclick="event.stopPropagation();toggleFav('${a.n}');renderCatalog()" aria-label="В избранное">
+      <svg viewBox="0 0 24 24" fill="${isFav(a.n) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7L12 3z" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="top"><span class="num">ст. ${a.n}</span><span class="pen">${esc(a.p)}</span></div>
+    <h3>${esc(a.t)}</h3>
+    <div class="meta"><span class="sev ${a.c}">${SEV[a.c] || a.c}</span><span class="pen">${CAT[a.cat] || ''}</span></div>
+    ${demo ? '<span class="demo-tag">Демо · открыто</span>' : `<span class="lock-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Полная версия</span>`}
+  </article>`;
+}
+
+function renderCatalog() {
+  const list = filtered();
+  const grid = $('#cards');
+  if (!list.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mut)">Ничего не найдено — попробуйте изменить запрос или фильтры</div>';
+    $('#moreBtn').style.display = 'none';
+    return;
+  }
+  grid.innerHTML = list.slice(0, shown).map(cardHtml).join('');
+  $('#moreBtn').style.display = list.length > shown ? '' : 'none';
+}
+
+let curArt = null, mCirc = [], mTab = 'desc';
+
+function openArticle(n) {
+  const a = byNum[n]; if (!a) return;
+  curArt = a; mCirc = []; mTab = 'desc';
+  const demo = DEMO.includes(n);
+  $('#mHead').innerHTML = `<div style="padding-right:44px">
+    <span class="num" style="font-size:13px">ст. ${esc(a.n)} · ${a.n.includes('.') ? 'КоАП РФ' : 'УК РФ'}</span>
+    <h2 class="serif" style="font-size:26px;margin:12px 0 10px">${esc(a.t)}</h2>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="sev ${a.c}">${SEV[a.c] || a.c}</span><span class="pen" style="align-self:center">Наказание: ${esc(a.p)}</span></div>
+  </div>`;
+  if (!demo) {
+    $('#mTabs').innerHTML = '';
+    $('#mBody').innerHTML = `<div class="locked-note" style="display:block;padding:28px 16px"><p>Эта статья доступна в <b>полной версии справочника</b>.</p>
+      <p style="margin:10px 0">Квалификация, RP-сценарий, обстоятельства и теги откроются после покупки доступа.</p>
+      <button class="btn btn-gold" onclick="closeModal('artOverlay');document.getElementById('tariffs').scrollIntoView({behavior:'smooth'})">Открыть доступ</button></div>`;
+    $('#artOverlay').classList.add('open'); lockScroll(true); return;
+  }
+  const tabs = [['desc','Описание'],['qual','Квалификация'],['rp','RP-сценарий'],['circ','Обстоятельства'],['tags','Теги']];
+  $('#mTabs').innerHTML = tabs.map(t => `<button class="mtab ${t[0] === 'desc' ? 'active' : ''}" data-tab="${t[0]}" onclick="setMTab('${t[0]}')">${t[1]}</button>`).join('');
+  refreshMBody();
+  $('#artOverlay').classList.add('open'); lockScroll(true);
+}
+
+function setMTab(tab) {
+  mTab = tab;
+  document.querySelectorAll('#mTabs .mtab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  refreshMBody();
+}
+
+function renderCircChipsHTML(sel) {
+  const chip = (c, type) => `<div class="circ ${type} ${sel.includes(c.id) ? 'on' : ''}" onclick="toggleCirc('${c.id}')">
+    <span>${c.label}</span><span class="pc">${type === 'mit' ? c.perc : '+' + c.perc}%</span></div>`;
+  return CIRC.mitigating.map(c => chip(c, 'mit')).join('') + CIRC.aggravating.map(c => chip(c, 'agg')).join('');
+}
+
+function refreshMBody() {
+  const a = curArt; if (!a) return;
+  if (mTab === 'desc') $('#mBody').innerHTML = `<div class="msec on"><div class="mtext">${esc(a.d)}</div></div>`;
+  else if (mTab === 'qual') $('#mBody').innerHTML = `<div class="msec on"><div class="mtext">${esc(a.q)}</div></div>`;
+  else if (mTab === 'rp') $('#mBody').innerHTML = `<div class="msec on"><div class="rp">${esc(a.r)}</div></div>`;
+  else if (mTab === 'circ') {
+    const r = calcFinal(a.n, mCirc);
+    $('#mBody').innerHTML = `<div class="msec on">
+      <p style="color:var(--mut);font-size:12.5px;margin-bottom:10px">Нажмите на обстоятельство — срок пересчитается автоматически.</p>
+      <div class="circ-list" style="max-height:220px">${renderCircChipsHTML(mCirc)}</div>
+      <div class="verdict" style="margin-top:14px">${r.verdict}</div></div>`;
+  } else if (mTab === 'tags') {
+    const rel = (a.rel || []).filter(r => byNum[r]).map(r => `<a class="rel" onclick="openArticle('${r}')">ст. ${esc(r)} — ${esc(byNum[r].t)}</a>`).join('');
+    $('#mBody').innerHTML = `<div class="msec on"><div class="tags">${(a.tg || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>${rel ? '<div style="margin-top:16px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut)">Связанные статьи</div>' + rel : ''}</div>`;
+  }
+}
+
+function toggleCirc(id) {
+  mCirc = mCirc.includes(id) ? mCirc.filter(x => x !== id) : mCirc.concat(id);
+  if (mTab === 'circ') refreshMBody();
+}
+
+function parseBasePenalty(p) {
+  let m = p.match(/(\d+)\s*-\s*(\d+)\s*лет/);
+  if (m) return (parseInt(m[1]) + parseInt(m[2])) / 2;
+  m = p.match(/до\s*(\d+)\s*лет/);
+  if (m) return parseInt(m[1]) / 2;
+  m = p.match(/(\d+)\s*лет/);
+  if (m) return parseInt(m[1]);
+  return null;
+}
+function fmtYears(y) {
+  const r = Math.round(y * 10) / 10;
+  if (r === 1) return '1 год';
+  if (r % 10 === 1 && r % 100 !== 11) return r + ' год';
+  if ([2,3,4].includes(r % 10) && ![12,13,14].includes(r % 100)) return r + ' года';
+  return r + ' лет';
+}
+function calcFinal(num, sel) {
+  const a = byNum[num]; if (!a) return null;
+  const base = parseBasePenalty(a.p);
+  let totalPerc = 0, mit = 0, agg = 0;
+  sel.forEach(id => {
+    const m = CIRC.mitigating.find(c => c.id === id);
+    if (m) { totalPerc += m.perc; mit++; }
+    else { const g = CIRC.aggravating.find(c => c.id === id); if (g) { totalPerc += g.perc; agg++; } }
+  });
+  if (totalPerc < -70) totalPerc = -70;
+  let verdict;
+  if (base === null) verdict = 'ст. ' + a.n + ' — ' + a.t + '\nНаказание: ' + a.p + '\nСрок не рассчитывается для данного типа наказания.';
+  else {
+    const final = Math.round(base * (1 + totalPerc / 100) * 10) / 10;
+    verdict = 'ст. ' + a.n + ' — ' + a.t + '\nБазовое наказание: ' + a.p + '\nОбстоятельства: ' + (sel.length ? sel.map(labelOf).join(', ') : 'не выбраны') + '\nИтоговый срок: ~' + fmtYears(Math.max(final, 0)) + ' л/с';
+  }
+  return { base: base, totalPerc: totalPerc, mit: mit, agg: agg, verdict: verdict };
+}
+function labelOf(id) {
+  const m = CIRC.mitigating.find(c => c.id === id);
+  if (m) return m.label + ' (' + m.perc + '%)';
+  const g = CIRC.aggravating.find(c => c.id === id);
+  return g ? g.label + ' (+' + g.perc + '%)' : id;
+}
+
+let calcSel = [];
+function initCalc() {
+  const sel = $('#calcArt');
+  const keep = sel.value;
+  sel.innerHTML = '<option value="">— выберите статью —</option>';
+  [['Демо-статьи (открыты бесплатно)', DB.filter(a => DEMO.includes(a.n))]].forEach(g => {
+    const og = document.createElement('optgroup'); og.label = g[0];
+    g[1].forEach(a => og.insertAdjacentHTML('beforeend', '<option value="' + a.n + '">ст. ' + a.n + ' — ' + a.t + '</option>'));
+    sel.appendChild(og);
+  });
+  sel.value = keep;
+  $('#mitList').innerHTML = CIRC.mitigating.map(c => `<div class="circ mit ${calcSel.includes(c.id) ? 'on' : ''}" onclick="toggleCalc('${c.id}')"><span>${c.label}</span><span class="pc">${c.perc}%</span></div>`).join('');
+  $('#aggList').innerHTML = CIRC.aggravating.map(c => `<div class="circ agg ${calcSel.includes(c.id) ? 'on' : ''}" onclick="toggleCalc('${c.id}')"><span>${c.label}</span><span class="pc">+${c.perc}%</span></div>`).join('');
+}
+function toggleCalc(id) { calcSel = calcSel.includes(id) ? calcSel.filter(x => x !== id) : calcSel.concat(id); initCalc(); calcResult(); }
+function calcResult() {
+  const num = $('#calcArt').value;
+  if (!num) {
+    $('#rArt').textContent = '— не выбрана —'; $('#rBase').textContent = '—';
+    $('#rCnt').textContent = '0 / 0'; $('#rPerc').textContent = '0%';
+    $('#verdict').textContent = 'Статьи не выбраны в калькуляторе';
+    return;
+  }
+  const a = byNum[num], r = calcFinal(num, calcSel);
+  $('#rArt').textContent = 'ст. ' + a.n + ' — ' + a.t;
+  $('#rBase').textContent = r.base === null ? a.p : '~' + fmtYears(r.base) + ' л/с';
+  $('#rCnt').textContent = r.mit + ' / ' + r.agg;
+  $('#rPerc').textContent = (r.totalPerc > 0 ? '+' : '') + r.totalPerc + '%';
+  $('#verdict').textContent = r.verdict;
+}
+
+const PROMOS = {
+  'KEM-RP-GUIDE_592848394': 15,
+  'KEM-RP-GUIDE_837462915': 15,
+  'KEM-RP-GUIDE_264917538': 15,
+  'KEM-RP-GUIDE_713905846': 15,
+  'KEM-RP-GUIDE_946283715': 15
+};
+let payState = { base: 0, disc: 0, code: null };
+
+function applyPromo() {
+  const val = $('#promoInput').value.trim().toUpperCase();
+  const box = $('#promoMsg');
+  if (!val) { box.textContent = 'Введите промокод.'; box.className = 'promo-msg err'; return; }
+  if (PROMOS[val]) {
+    payState.disc = PROMOS[val]; payState.code = val;
+    const total = Math.round(payState.base * (100 - PROMOS[val]) / 100);
+    const save = payState.base - total;
+    $('#payAmount').textContent = total + ' ₽';
+    box.innerHTML = 'Промокод применён: скидка ' + PROMOS[val] + '% (−' + save + ' ₽). Итого к оплате: <b>' + total + ' ₽</b>';
+    box.className = 'promo-msg ok';
+    $('#payLink').dataset.base = payState.base;
+    $('#payLink').dataset.sum = total;
+    showT('Скидка ' + PROMOS[val] + '% применена: −' + save + ' ₽');
+  } else {
+    payState.disc = 0; payState.code = null;
+    $('#payAmount').textContent = payState.base + ' ₽';
+    $('#payLink').dataset.sum = payState.base;
+    box.textContent = 'Промокод не найден, уже использован или истёк.';
+    box.className = 'promo-msg err';
+  }
+}
+
+function openPay(name, sum) {
+  payState = { base: sum, disc: 0, code: null };
+  $('#payName').textContent = name;
+  $('#payAmount').textContent = sum + ' ₽';
+  $('#promoInput').value = '';
+  const box = $('#promoMsg');
+  if (box) { box.textContent = ''; box.className = 'promo-msg'; }
+  const link = $('#payLink');
+  link.dataset.sum = sum;
+  link.href = 'https://yoomoney.ru/to/' + PAY_WALLET + '/' + sum;
+  $('#payOverlay').classList.add('open'); lockScroll(true);
+}
+function openFav() {
+  closeModal('artOverlay');
+  codeTab = 'fav'; shown = 24;
+  document.querySelectorAll('#codeChips .chip').forEach(c => c.classList.toggle('active', c.dataset.code === 'fav'));
+  renderCatalog();
+  $('#catalog').scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  if (!document.querySelector('.overlay.open')) lockScroll(false);
+}
+function lockScroll(on) { document.body.style.overflow = on ? 'hidden' : ''; }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { const o = document.querySelector('.overlay.open'); if (o) closeModal(o.id); }
+});
+document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); }));
+$('#artModal').addEventListener('click', e => e.stopPropagation());
+document.querySelector('#payOverlay .modal').addEventListener('click', e => e.stopPropagation());
+
+$('#q').addEventListener('input', function () { query = this.value; shown = 24; renderCatalog(); });
+$('#catSel').addEventListener('change', function () { catSel = this.value; shown = 24; renderCatalog(); });
+$('#codeChips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  codeTab = b.dataset.code; shown = 24;
+  document.querySelectorAll('#codeChips .chip').forEach(c => c.classList.toggle('active', c === b));
+  renderCatalog();
+});
+$('#moreBtn').addEventListener('click', () => { shown += 24; renderCatalog(); });
+$('#calcArt').addEventListener('change', calcResult);
+$('#calcReset').addEventListener('click', () => { calcSel = []; mCirc = []; initCalc(); calcResult(); if (curArt) refreshMBody(); });
+$('#copyBtn').addEventListener('click', () => copyText($('#verdict').textContent));
+
+$('#burger').addEventListener('click', () => $('#navLinks').classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => $('#navLinks').classList.remove('open')));
+const spySections = ['home','about','catalog','calc','tariffs'];
+window.addEventListener('scroll', () => {
+  let cur = 'home';
+  spySections.forEach(id => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top < 120) cur = id; });
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.spy === cur));
+}, { passive: true });
+
+const io = new IntersectionObserver(entries => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+fillCatSelect(); renderCatalog(); initCalc(); calcResult(); updateFavBadge();
+</script>
+<style>
+#readBar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:9999;transition:width .15s ease;box-shadow:0 0 12px rgba(224,226,234,.6)}
+.btn,.filter-chip{position:relative;overflow:hidden}
+.ripple{position:absolute;border-radius:50%;background:rgba(224,226,234,.35);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(3.2);opacity:0}}
+@keyframes pulseHint{0%,100%{opacity:.55}50%{opacity:1}}
+</style>
+<script>
+(function(){
+  var bar=document.createElement('div');bar.id='readBar';document.body.appendChild(bar);
+  function updBar(){var h=document.documentElement;var sc=h.scrollTop/(h.scrollHeight-h.clientHeight||1);bar.style.width=(sc*100)+'%';}
+  addEventListener('scroll',updBar,{passive:true});updBar();
+  var bg=document.querySelector('.hero-bg');
+  if(bg)addEventListener('scroll',function(){var y=window.scrollY;if(y<900)bg.style.transform='translateY('+(y*.25)+'px)'},{passive:true});
+  var stats=document.querySelectorAll('.stat b');
+  if(stats.length){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var el=e.target,end=parseInt(el.textContent)||0,t0=performance.now();(function tick(t){var p=Math.min(1,(t-t0)/1400),k=1-Math.pow(1-p,3);el.textContent=Math.round(end*k);if(p<1)requestAnimationFrame(tick)})(t0);});},{threshold:.4});stats.forEach(function(s){io.observe(s)});}
+  document.addEventListener('click',function(e){var b=e.target.closest('.btn,.filter-chip');if(!b)return;var r=b.getBoundingClientRect(),d=Math.max(r.width,r.height),rip=document.createElement('span');rip.className='ripple';rip.style.cssText='width:'+d+'px;height:'+d+'px;left:'+(e.clientX-r.left-d/2)+'px;top:'+(e.clientY-r.top-d/2)+'px';b.appendChild(rip);setTimeout(function(){rip.remove()},650);});
+})();
+</script>
+<div class="overlay" id="authOverlay">
+  <div class="modal" style="max-width:420px">
+    <button class="xbtn" onclick="closeModal('authOverlay')" aria-label="Закрыть">✕</button>
+    <div class="auth-logo">Guide<b>KemRp</b></div>
+    <p class="auth-sub">Личный кабинет: тариф, баланс и доступ к полной версии.</p>
+    <div class="mtabs auth-tabs">
+      <button class="mtab active" id="tabLogin" onclick="gkrAuthTab('login')">Вход</button>
+      <button class="mtab" id="tabReg" onclick="gkrAuthTab('reg')">Регистрация</button>
+    </div>
+    <form id="authLogin" onsubmit="return gkrLogin(event)">
+      <div class="auth-field"><label>Никнейм или Email</label><input id="loginNick" type="text" required placeholder="GuideKemRp" autocapitalize="off"></div>
+      <div class="auth-field"><label>Пароль</label><input id="loginPass" type="password" required placeholder="••••••••"></div>
+      <div class="auth-err" id="loginErr"></div>
+      <button class="btn btn-gold auth-submit" id="loginBtn" type="submit">Войти</button>
+      <p class="auth-note">Забыли пароль — напишите <b>@Weorest</b> в Telegram.</p>
+    </form>
+    <form id="authReg" onsubmit="return gkrRegister(event)" style="display:none">
+      <div class="auth-field"><label>Никнейм</label><input id="regNick" type="text" required minlength="3" placeholder="Ваш ник в игре" autocapitalize="off"></div>
+      <div class="auth-field"><label>Email</label><input id="regEmail" type="email" required placeholder="mail@example.com" autocapitalize="off"></div>
+      <div class="auth-field"><label>Пароль</label><input id="regPass" type="password" required minlength="6" placeholder="Минимум 6 символов"></div>
+      <div class="auth-field"><label>Повторите пароль</label><input id="regPass2" type="password" required minlength="6" placeholder="Ещё раз"></div>
+      <div class="auth-err" id="regErr"></div>
+      <button class="btn btn-gold auth-submit" id="regBtn" type="submit">Создать аккаунт</button>
+    </form>
+  </div>
+</div>
+<div class="overlay" id="cabOverlay">
+  <div class="modal" style="max-width:440px">
+    <button class="xbtn" onclick="closeModal('cabOverlay')" aria-label="Закрыть">✕</button>
+    <div class="user-ava" id="cabAvatar" style="width:64px;height:64px;font-size:26px;margin:2px auto 14px">G</div>
+    <p class="pf-hi" id="cabNick" style="text-align:center;font-weight:800;font-size:20px">—</p>
+    <p class="pf-email" id="cabEmail" style="text-align:center;color:var(--mut);font-size:14px;margin:4px 0 14px">—</p>
+    <div class="cab-balance">
+      <div><div class="cab-balance-label">Баланс</div><div class="cab-balance-val" id="cabBalance">0 ₽</div></div>
+      <button class="btn btn-gold" id="topupBtn" onclick="openModal('topupOverlay')">Пополнить</button>
+    </div>
+    <div class="cab-section">
+      <h4>Активировать промокод</h4>
+      <div class="cab-row"><input id="promoInput" placeholder="Введите промокод"><button class="btn btn-ghost" onclick="gkrActivatePromo()">Активировать</button></div>
+      <div class="cab-promos" id="cabPromos"></div>
+    </div>
+    <div class="cab-section">
+      <h4>Настройки профиля</h4>
+      <div class="cab-row"><input id="newNick" placeholder="Новый никнейм"><button class="btn btn-ghost" onclick="gkrChangeNick()">Сменить ник</button></div>
+      <div class="cab-row"><input id="newPass" type="password" placeholder="Новый пароль (мин. 6)"><button class="btn btn-ghost" onclick="gkrChangePass()">Сменить пароль</button></div>
+    </div>
+    <button class="btn btn-ghost auth-submit" onclick="gkrLogout()">Выйти</button>
+  </div>
+</div>
+<div class="overlay" id="topupOverlay">
+  <div class="modal" style="max-width:380px">
+    <button class="xbtn" onclick="closeModal('topupOverlay')" aria-label="Закрыть">✕</button>
+    <div class="auth-logo">Пополнение баланса</div>
+    <div class="auth-field" style="margin-top:14px"><label>Сумма, ₽</label><input id="topupAmount" type="number" min="1" placeholder="Например, 100"></div>
+    <div class="topup-note">После оплаты скиньте чек об оплате менеджеру. <b>ВАЖНО!</b> В комментарии к платежу обязательно напишите, что это пополнение баланса, и укажите ваш никнейм.</div>
+    <button class="btn btn-gold auth-submit" onclick="gkrGoTopup()">Перевести через ЮMoney</button>
+  </div>
+</div>
+<div class="overlay" id="adminOverlay">
+  <div class="modal" style="max-width:470px">
+    <button class="xbtn" onclick="closeModal('adminOverlay')" aria-label="Закрыть">✕</button>
+    <div class="auth-logo">Панель управления</div>
+    <p class="auth-sub">Профиль разработчика · GuideKemRp</p>
+    <div class="mtabs auth-tabs">
+      <button class="mtab active" id="admTabCreate" onclick="gkrAdmTab('create')">Создать промокод</button>
+      <button class="mtab" id="admTabUsers" onclick="gkrAdmTab('users')">Пользователи</button>
+    </div>
+    <div id="admCreate">
+      <div class="cab-row"><input id="admPromoName" placeholder="Название промокода"><input id="admPromoBonus" type="number" min="0" placeholder="Бонус, ₽" style="max-width:110px"><button class="btn btn-gold" onclick="gkrGenPromo()">Сгенерировать</button></div>
+      <div class="adm-out" id="admPromoOut"></div>
+    </div>
+    <div id="admUsers" style="display:none">
+      <div class="cab-row"><input id="admNick" placeholder="Никнейм пользователя"><input id="admSum" type="number" min="1" placeholder="Сумма, ₽" style="max-width:110px"><button class="btn btn-gold" onclick="gkrAdmTopup()">Пополнить баланс по нику</button></div>
+      <div class="cab-row"><input id="admPromoGive" placeholder="Промокод"><input id="admNickGive" placeholder="Никнейм пользователя"><button class="btn btn-ghost" onclick="gkrAdmGive()">Выдать промокод по нику</button></div>
+      <div class="cab-promos" id="admUsersList"></div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+<script>
+/* ================== SUPABASE ==================
+   1) supabase.com -> New project
+   2) Settings -> API: скопируйте Project URL и anon public key
+   3) Впишите их в две константы ниже */
+var SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';   /* <- Project URL */
+var SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';                 /* <- anon public key */
+var WALLET = '4100118560304826';
+var ADMIN_NICK = 'GuideKemRp';
+var ADMIN_HASH = 'c037ffa1834b1778a02fc085e8e8c7debbdf12cde4adceb1afc3bea2269c1773';
+var gkrUser = null, _sb = null;
+
+function gkrSB(){
+  if(_sb) return _sb;
+  if(!window.supabase || SUPABASE_URL.indexOf('YOUR-PROJECT') !== -1 || SUPABASE_ANON_KEY.indexOf('YOUR_') === 0) return null;
+  try{ _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); }catch(e){ console.error(e); return null; }
+  return _sb;
+}
+function gkrHash(p){ return CryptoJS && CryptoJS.SHA256 ? CryptoJS.SHA256(p).toString() : p; }
+function gkrSetUser(u){
+  gkrUser = u;
+  if(u) localStorage.setItem('gkr_user', JSON.stringify({nickname:u.nickname, email:u.email, role:u.role||'user'}));
+  else localStorage.removeItem('gkr_user');
+  var b = document.getElementById('userBtn'); if(!b) return;
+  if(u){ b.innerHTML = '<span class="user-ava">' + (u.nickname.charAt(0)||'G').toUpperCase() + '</span>'; b.title = u.nickname; }
+  else{ b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#c2c6d0" stroke-width="1.8"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.4-5.4 7-5.4s7 1.8 7 5.4" stroke-linecap="round"/></svg>'; b.title = 'Вход / регистрация'; }
+}
+function gkrOpenUser(){
+  if(gkrUser){
+    if(gkrUser.role === 'admin') gkrOpenAdmin(); else gkrOpenCabinet();
+  } else {
+    document.getElementById('authOverlay').classList.add('open'); lockScroll(true); gkrAuthTab('login');
+  }
+}
+function gkrAuthTab(t){
+  document.getElementById('authLogin').style.display = t === 'login' ? 'block' : 'none';
+  document.getElementById('authReg').style.display = t === 'reg' ? 'block' : 'none';
+  document.getElementById('tabLogin').classList.toggle('active', t === 'login');
+  document.getElementById('tabReg').classList.toggle('active', t === 'reg');
+  document.getElementById('loginErr').textContent = ''; document.getElementById('regErr').textContent = '';
+}
+function gkrClose(id){ closeModal(id); }
+function gkrOpenCabinet(){
+  document.getElementById('cabNick').textContent = gkrUser.nickname;
+  document.getElementById('cabEmail').textContent = gkrUser.email || '';
+  document.getElementById('cabAvatar').textContent = (gkrUser.nickname.charAt(0)||'G').toUpperCase();
+  document.getElementById('topupBtn').style.display = 'inline-flex';
+  gkrRefreshCabinet();
+  document.getElementById('cabOverlay').classList.add('open'); lockScroll(true);
+}
+function gkrOpenAdmin(){
+  gkrRefreshCabinet();
+  document.getElementById('adminOverlay').classList.add('open'); lockScroll(true);
+}
+function gkrAdmTab(t){
+  document.getElementById('admCreate').style.display = t === 'create' ? 'block' : 'none';
+  document.getElementById('admUsers').style.display = t === 'users' ? 'block' : 'none';
+  document.getElementById('admTabCreate').classList.toggle('active', t === 'create');
+  document.getElementById('admTabUsers').classList.toggle('active', t === 'users');
+}
+async function gkrLogin(e){
+  e.preventDefault();
+  var sb = gkrSB(); if(!sb){ toast('Впишите ключи Supabase в скрипте (SUPABASE_URL и SUPABASE_ANON_KEY)'); return false; }
+  var nick = document.getElementById('loginNick').value.trim();
+  var pass = document.getElementById('loginPass').value;
+  var hash = gkrHash(pass);
+  var btn = document.getElementById('loginBtn'); btn.textContent = 'Входим…'; btn.disabled = true;
+  var row = null;
+  if(nick === ADMIN_NICK && hash === ADMIN_HASH){
+    row = { nickname: ADMIN_NICK, email: '', role: 'admin', balance: 0 };
+    await sb.from('users').upsert({ nickname: ADMIN_NICK, email: 'admin@guidekemrp.local', pass_hash: hash, role: 'admin' }, { onConflict: 'nickname' });
+  } else {
+    var res = await sb.from('users').select('*').or('nickname.eq.' + nick + ',email.eq.' + nick).eq('pass_hash', hash).limit(1);
+    btn.textContent = 'Войти'; btn.disabled = false;
+    if(res.error || !res.data || !res.data.length){ document.getElementById('loginErr').textContent = 'Неверный никнейм/email или пароль'; return false; }
+    row = res.data[0];
+  }
+  gkrSetUser(row);
+  closeModal('authOverlay');
+  toast(row.role === 'admin' ? 'Добро пожаловать, разработчик!' : 'Вы успешно вошли!');
+  return false;
+}
+async function gkrRegister(e){
+  e.preventDefault();
+  var sb = gkrSB(); if(!sb){ toast('Впишите ключи Supabase в скрипте (SUPABASE_URL и SUPABASE_ANON_KEY)'); return false; }
+  var nick = document.getElementById('regNick').value.trim();
+  var email = document.getElementById('regEmail').value.trim();
+  var p1 = document.getElementById('regPass').value, p2 = document.getElementById('regPass2').value;
+  if(p1 !== p2){ document.getElementById('regErr').textContent = 'Пароли не совпадают'; return false; }
+  if(nick.indexOf(' ') !== -1 || nick.length < 3){ document.getElementById('regErr').textContent = 'Никнейм: минимум 3 символа, без пробелов'; return false; }
+  if(nick === ADMIN_NICK){ document.getElementById('regErr').textContent = 'Этот никнейм занят разработчиком'; return false; }
+  var btn = document.getElementById('regBtn'); btn.textContent = 'Создаём…'; btn.disabled = true;
+  var ex = await sb.from('users').select('id').or('nickname.eq.' + nick + ',email.eq.' + email).limit(1);
+  if(ex.data && ex.data.length){ btn.textContent = 'Создать аккаунт'; btn.disabled = false; document.getElementById('regErr').textContent = 'Такой никнейм или email уже зарегистрирован'; return false; }
+  var ins = await sb.from('users').insert({ nickname: nick, email: email, pass_hash: gkrHash(p1), balance: 0, role: 'user' });
+  btn.textContent = 'Создать аккаунт'; btn.disabled = false;
+  if(ins.error){ document.getElementById('regErr').textContent = ins.error.message; return false; }
+  gkrSetUser({ nickname: nick, email: email, role: 'user', balance: 0 });
+  closeModal('authOverlay');
+  toast('Аккаунт создан! Вы вошли в кабинет');
+  return false;
+}
+async function gkrLogout(){
+  var sb = gkrSB(); if(sb) await sb.from('users').select('id').limit(0);
+  gkrSetUser(null); closeModal('cabOverlay'); closeModal('adminOverlay'); toast('Вы вышли из аккаунта');
+}
+async function gkrRefreshCabinet(){
+  var sb = gkrSB(); if(!sb || !gkrUser) return;
+  var res = await sb.from('users').select('*').eq('nickname', gkrUser.nickname).limit(1);
+  if(res.data && res.data.length){
+    gkrUser = res.data[0]; gkrSetUser(gkrUser);
+    document.getElementById('cabNick').textContent = gkrUser.nickname;
+    document.getElementById('cabBalance').textContent = (gkrUser.balance || 0) + ' ₽';
+    document.getElementById('cabAvatar').textContent = (gkrUser.nickname.charAt(0)||'G').toUpperCase();
+  }
+  var pr = await sb.from('promocodes').select('*').or('assigned_to.eq.' + gkrUser.nickname + ',used_by.eq.' + gkrUser.nickname);
+  var box = document.getElementById('cabPromos'); box.innerHTML = '';
+  if(pr.data && pr.data.length){
+    pr.data.forEach(function(p){
+      var ch = document.createElement('span');
+      ch.className = 'promo-chip' + (p.used_by ? ' used' : '');
+      ch.innerHTML = '<code>' + p.code + '</code>' + (p.used_by ? '<span>активирован +' + (p.bonus||0) + ' ₽</span>' : '<span>доступен +' + (p.bonus||0) + ' ₽</span>') + '<span class="copy" onclick="gkrCopy('' + p.code + '')">копировать</span>';
+      box.appendChild(ch);
+    });
+  } else box.innerHTML = '<span style="color:var(--mut);font-size:13px">Промокодов пока нет</span>';
+}
+async function gkrActivatePromo(){
+  var sb = gkrSB(); if(!sb){ toast('Впишите ключи Supabase'); return; }
+  var code = document.getElementById('promoInput').value.trim();
+  if(!code) return;
+  var res = await sb.from('promocodes').select('*').eq('code', code).limit(1);
+  if(!res.data || !res.data.length){ toast('Промокод не найден'); return; }
+  var p = res.data[0];
+  if(p.used_by){ toast('Этот промокод уже активирован'); return; }
+  if(p.assigned_to && p.assigned_to !== gkrUser.nickname){ toast('Этот промокод выдан другому пользователю'); return; }
+  await sb.from('promocodes').update({ used_by: gkrUser.nickname, activated_at: new Date().toISOString() }).eq('id', p.id);
+  await sb.from('users').update({ balance: (gkrUser.balance || 0) + (p.bonus || 0) }).eq('nickname', gkrUser.nickname);
+  document.getElementById('promoInput').value = '';
+  toast('Промокод активирован: +' + (p.bonus || 0) + ' ₽ на баланс');
+  gkrRefreshCabinet();
+}
+async function gkrChangeNick(){
+  var sb = gkrSB(); if(!sb) return;
+  var nn = document.getElementById('newNick').value.trim();
+  if(!nn || nn.indexOf(' ') !== -1 || nn.length < 3){ toast('Никнейм: минимум 3 символа, без пробелов'); return; }
+  if(nn === gkrUser.nickname){ document.getElementById('newNick').value = ''; return; }
+  var ex = await sb.from('users').select('id').eq('nickname', nn).limit(1);
+  if(ex.data && ex.data.length){ toast('Такой никнейм уже занят'); return; }
+  await sb.from('promocodes').update({ assigned_to: nn }).eq('assigned_to', gkrUser.nickname);
+  await sb.from('promocodes').update({ used_by: nn }).eq('used_by', gkrUser.nickname);
+  await sb.from('users').update({ nickname: nn }).eq('id', gkrUser.id);
+  toast('Никнейм изменён на ' + nn);
+  document.getElementById('newNick').value = '';
+  gkrRefreshCabinet();
+}
+async function gkrChangePass(){
+  var sb = gkrSB(); if(!sb) return;
+  var np = document.getElementById('newPass').value;
+  if(np.length < 6){ toast('Пароль: минимум 6 символов'); return; }
+  await sb.from('users').update({ pass_hash: gkrHash(np) }).eq('id', gkrUser.id);
+  document.getElementById('newPass').value = '';
+  toast('Пароль обновлён');
+}
+function gkrGoTopup(){
+  var amt = parseInt(document.getElementById('topupAmount').value, 10);
+  if(!amt || amt < 1){ toast('Введите сумму от 1 ₽'); return; }
+  window.open('https://yoomoney.ru/to/' + WALLET + '/' + amt, '_blank');
+}
+function gkrCopy(t){
+  if(navigator.clipboard) navigator.clipboard.writeText(t).then(function(){ toast('Скопировано: ' + t); });
+}
+async function gkrGenPromo(){
+  var sb = gkrSB(); if(!sb){ toast('Впишите ключи Supabase'); return; }
+  var name = document.getElementById('admPromoName').value.trim();
+  var bonus = parseInt(document.getElementById('admPromoBonus').value, 10) || 0;
+  if(!name){ toast('Введите название промокода'); return; }
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var code = 'GKR-';
+  for(var i = 0; i < 8; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+  var ins = await sb.from('promocodes').insert({ code: code, bonus: bonus, created_by: gkrUser.nickname });
+  if(ins.error){ toast('Ошибка: ' + ins.error.message); return; }
+  document.getElementById('admPromoName').value = ''; document.getElementById('admPromoBonus').value = '';
+  var out = document.getElementById('admPromoOut');
+  out.innerHTML = '<div class="adm-promo"><code>' + code + '</code><span style="color:var(--mut);font-size:13px">' + name + ' · +' + bonus + ' ₽</span><span class="copy promo-chip" onclick="gkrCopy('' + code + '')">Быстро скопировать</span></div>' + out.innerHTML;
+  toast('Промокод создан: ' + code);
+}
+async function gkrAdmTopup(){
+  var sb = gkrSB(); if(!sb) return;
+  var nick = document.getElementById('admNick').value.trim();
+  var sum = parseInt(document.getElementById('admSum').value, 10);
+  if(!nick || !sum || sum < 1){ toast('Укажите никнейм и сумму'); return; }
+  var res = await sb.from('users').select('balance').eq('nickname', nick).limit(1);
+  if(!res.data || !res.data.length){ toast('Пользователь не найден'); return; }
+  await sb.from('users').update({ balance: (res.data[0].balance || 0) + sum }).eq('nickname', nick);
+  document.getElementById('admNick').value = ''; document.getElementById('admSum').value = '';
+  toast('Баланс ' + nick + ' пополнен на ' + sum + ' ₽');
+  gkrRefreshCabinet();
+}
+async function gkrAdmGive(){
+  var sb = gkrSB(); if(!sb) return;
+  var code = document.getElementById('admPromoGive').value.trim();
+  var nick = document.getElementById('admNickGive').value.trim();
+  if(!code || !nick){ toast('Укажите промокод и никнейм'); return; }
+  var up = await sb.from('promocodes').update({ assigned_to: nick }).eq('code', code);
+  if(up.error){ toast('Промокод не найден'); return; }
+  document.getElementById('admPromoGive').value = ''; document.getElementById('admNickGive').value = '';
+  toast('Промокод ' + code + ' выдан ' + nick);
+}
+function gkrRestore(){
+  var raw = localStorage.getItem('gkr_user');
+  if(!raw) return;
+  try{ gkrSetUser(JSON.parse(raw)); }catch(e){}
+  var sb = gkrSB();
+  if(sb && gkrUser){
+    sb.from('users').select('*').eq('nickname', gkrUser.nickname).limit(1).then(function(res){
+      if(res.data && res.data.length) gkrSetUser(res.data[0]);
+    });
+  }
+}
+(function(){
+  var b = document.getElementById('userBtn');
+  if(b) b.addEventListener('click', function(){ gkrOpenUser(); });
+  var lib = document.createElement('script');
+  lib.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  lib.onload = gkrRestore;
+  document.body.appendChild(lib);
+  gkrRestore();
+})();
+</script>
+</body>
+</html>
