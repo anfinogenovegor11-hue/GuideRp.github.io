@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KeyPromocodes · GuideKemRp</title>
+<style>
+  :root{
+    --bg:#0b0f14; --card:#121a23; --card2:#0f151d; --line:#1f2a36;
+    --text:#e6edf3; --muted:#8b98a5; --green:#22c55e; --green2:#16a34a;
+    --red:#ef4444; --amber:#f59e0b; --radius:14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif; min-height:100vh; padding:24px 16px}
+  .wrap{max-width:640px; margin:0 auto}
+  .brand{display:flex; align-items:center; gap:10px; margin-bottom:22px}
+  .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--green),#065f46);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#04140a}
+  .brand h1{font-size:20px}
+  .brand p{font-size:12px;color:var(--muted)}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px; margin-bottom:16px}
+  .card h2{font-size:16px; margin-bottom:14px}
+  .muted{color:var(--muted); font-size:13px; line-height:1.5}
+  .seg{display:flex; gap:8px; margin:12px 0}
+  .seg button{flex:1; background:var(--card2); border:1px solid var(--line); color:var(--text); padding:10px 8px; border-radius:10px; cursor:pointer; font-size:13px; transition:.15s}
+  .seg button.active{border-color:var(--green); color:var(--green); background:rgba(34,197,94,.08); font-weight:600}
+  input[type=range]{width:100%; accent-color:var(--green); margin:10px 0 4px}
+  .bigval{font-size:30px; font-weight:800; color:var(--green); text-align:center; margin:6px 0 12px}
+  input[type=number]{width:100%; background:var(--card2); border:1px solid var(--line); color:var(--text); border-radius:10px; padding:12px; font-size:16px; outline:none}
+  input[type=number]:focus{border-color:var(--green)}
+  .btn{width:100%; background:var(--green); color:#04140a; border:none; border-radius:10px; padding:14px; font-size:15px; font-weight:700; cursor:pointer; margin-top:14px; transition:.15s}
+  .btn:hover{background:#4ade80}
+  .btn:disabled{opacity:.4; cursor:not-allowed}
+  .btn.ghost{background:var(--card2); color:var(--text); border:1px solid var(--line); font-weight:600}
+  .result{margin-top:14px; background:var(--card2); border:1px dashed var(--green); border-radius:12px; padding:14px; text-align:center; display:none}
+  .code{font-family:'Courier New',monospace; font-size:19px; font-weight:700; letter-spacing:1px; word-break:break-all}
+  .copied{color:var(--green); font-size:12px; margin-top:8px; display:none}
+  .item{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:11px 12px; background:var(--card2); border:1px solid var(--line); border-radius:10px; margin-bottom:8px}
+  .item .c{font-family:'Courier New',monospace; font-size:13px; font-weight:700}
+  .item .d{font-size:11px; color:var(--muted); margin-top:2px}
+  .badge{font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; white-space:nowrap}
+  .b-a{background:rgba(34,197,94,.15); color:var(--green)}
+  .b-u{background:rgba(239,68,68,.15); color:var(--red)}
+  .b-e{background:rgba(245,158,11,.15); color:var(--amber)}
+  .tabs{display:flex; gap:8px; margin-bottom:12px}
+  .tabs button{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; padding:6px 10px; border-radius:8px}
+  .tabs button.active{background:var(--card2); color:var(--text)}
+  .empty{text-align:center; color:var(--muted); font-size:13px; padding:20px 0}
+  /* шторка доступа */
+  #gate{position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:50; padding:20px}
+  #gate .box{max-width:380px; width:100%; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:28px}
+  #gate .lock{font-size:34px; text-align:center; margin-bottom:10px}
+  #gate input{width:100%; background:var(--card2); border:1px solid var(--line); color:var(--text); border-radius:10px; padding:13px; font-size:15px; outline:none; text-align:center; letter-spacing:2px}
+  #gate input:focus{border-color:var(--green)}
+  .err{color:var(--red); font-size:12px; text-align:center; margin-top:10px; display:none}
+  .footer{text-align:center; color:var(--muted); font-size:11px; margin-top:20px}
+</style>
+</head>
+<body>
+
+<!-- ====== ЗАЩИТА: КЛЮЧ ВШИТ В ФАЙЛ ====== -->
+<div id="gate">
+  <div class="box">
+    <div class="lock">🔒</div>
+    <h2 style="text-align:center;margin-bottom:6px">Панель промокодов</h2>
+    <p class="muted" style="text-align:center;margin-bottom:18px">Доступ только для разработчика. Введите ключ доступа.</p>
+    <input id="keyInput" type="password" placeholder="Ключ доступа" autocomplete="off">
+    <div class="err" id="keyErr">Неверный ключ. Попробуйте ещё раз.</div>
+    <button class="btn" onclick="tryEnter()">Войти</button>
+  </div>
+</div>
+
+<div class="wrap" id="app" style="display:none">
+  <div class="brand">
+    <div class="logo">G</div>
+    <div>
+      <h1>KeyPromocodes</h1>
+      <p>Генератор промокодов · GuideKemRp</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Создать промокод</h2>
+    <div class="seg">
+      <button id="t-p" class="active" onclick="setType('p')">В процентах</button>
+      <button id="t-r" onclick="setType('r')">В рублях</button>
+      <button id="t-f" onclick="setType('f')">Бесплатно</button>
+    </div>
+
+    <div id="pane-p">
+      <div class="bigval" id="pval">10%</div>
+      <input type="range" min="1" max="99" value="10" id="prange" oninput="document.getElementById('pval').textContent=this.value+'%'">
+      <p class="muted" style="text-align:center">Скидка в процентах от цены тарифа</p>
+    </div>
+
+    <div id="pane-r" style="display:none">
+      <p class="muted" style="margin-bottom:8px">Сколько рублей вычесть из цены тарифа</p>
+      <input type="number" min="1" max="500" value="50" id="rval" placeholder="Например, 50">
+    </div>
+
+    <div id="pane-f" style="display:none">
+      <p class="muted" style="text-align:center">Промокод полностью покрывает стоимость любого тарифа — покупка бесплатна.</p>
+    </div>
+
+    <input type="text" id="forNick" placeholder="Ник игрока (необязательно — оставьте пустым для общего кода)"
+           style="width:100%; background:var(--card2); border:1px solid var(--line); color:var(--text); border-radius:10px; padding:12px; font-size:14px; outline:none; margin-top:12px">
+
+    <button class="btn" onclick="generate()">Сгенерировать промокод</button>
+
+    <div class="result" id="result">
+      <div class="code" id="codeOut">—</div>
+      <button class="btn ghost" onclick="copyCode()" style="margin-top:10px">Скопировать код</button>
+      <div class="copied" id="copiedMsg">Скопировано — отправьте игроку</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Мои промокоды</h2>
+    <div class="tabs">
+      <button class="active" onclick="setFilter('all',this)">Все</button>
+      <button onclick="setFilter('active',this)">Активные</button>
+      <button onclick="setFilter('used',this)">Использованные</button>
+    </div>
+    <div id="list"></div>
+  </div>
+
+  <p class="footer">Промокод одноразовый · действует 7 дней · GuideKemRp © 2025</p>
+</div>
+
+<script>
+// ===== КЛЮЧ ДОСТУПА (вшит в файл) =====
+var ADMIN_KEY = 'GKR-HZSZTZWJ';
+
+// ===== ХРАНИЛИЩЕ (то же, что читает сайт: gkrp_promocodes) =====
+function loadCodes(){ try{ return JSON.parse(localStorage.getItem('gkrp_promocodes')||'[]'); }catch(e){ return []; } }
+function saveCodes(arr){ localStorage.setItem('gkrp_promocodes', JSON.stringify(arr)); }
+
+// ===== ВХОД ПО КЛЮЧУ =====
+function tryEnter(){
+  var v = document.getElementById('keyInput').value.trim();
+  if(v === ADMIN_KEY){
+    sessionStorage.setItem('gkrp_admin_ok','1');
+    document.getElementById('gate').style.display='none';
+    document.getElementById('app').style.display='block';
+    render();
+  } else {
+    document.getElementById('keyErr').style.display='block';
+    document.getElementById('keyInput').value='';
+  }
+}
+document.getElementById('keyInput').addEventListener('keydown', function(e){ if(e.key==='Enter') tryEnter(); });
+if(sessionStorage.getItem('gkrp_admin_ok')==='1'){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('app').style.display='block';
+}
+
+// ===== ТИПЫ СКИДОК =====
+var curType = 'p';
+function setType(t){
+  curType = t;
+  ['p','r','f'].forEach(function(x){
+    document.getElementById('t-'+x).classList.toggle('active', x===t);
+    document.getElementById('pane-'+x).style.display = (x===t)?'block':'none';
+  });
+}
+
+// ===== ГЕНЕРАЦИЯ КОДА =====
+var CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // без O/0 и I/1 — чтобы не путались
+function randomPart(n){
+  var s='';
+  for(var i=0;i<n;i++) s += CHARS[Math.floor(Math.random()*CHARS.length)];
+  return s;
+}
+function generate(){
+  var code = 'KEM-RP-GUIDE_' + randomPart(9);
+  var obj = { code: code, created: Date.now() };
+
+  if(curType==='p'){
+    obj.type='percent'; obj.value=parseInt(document.getElementById('prange').value,10);
+  } else if(curType==='r'){
+    var rv = parseInt(document.getElementById('rval').value,10);
+    if(!rv || rv<1){ rv=50; document.getElementById('rval').value=50; }
+    obj.type='rub'; obj.value=rv;
+  } else {
+    obj.type='free'; obj.value=0;
+  }
+
+  var nick = document.getElementById('forNick').value.trim();
+  if(nick) obj.forNick = nick;
+
+  var arr = loadCodes();
+  arr.unshift(obj);
+  saveCodes(arr);
+
+  document.getElementById('codeOut').textContent = code;
+  document.getElementById('result').style.display='block';
+  document.getElementById('copiedMsg').style.display='none';
+  lastCode = code;
+  render();
+}
+var lastCode = null;
+function copyCode(){
+  if(!lastCode) return;
+  var t = document.createElement('textarea');
+  t.value = lastCode; document.body.appendChild(t); t.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  if(navigator.clipboard) navigator.clipboard.writeText(lastCode);
+  document.body.removeChild(t);
+  document.getElementById('copiedMsg').style.display='block';
+}
+
+// ===== СПИСОК КОДОВ =====
+var curFilter='all';
+function setFilter(f, btn){
+  curFilter=f;
+  var bs = document.querySelectorAll('.tabs button');
+  bs.forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  render();
+}
+function describe(o){
+  if(o.type==='percent') return 'Скидка ' + o.value + '%';
+  if(o.type==='rub') return 'Скидка ' + o.value + ' ₽';
+  return 'Бесплатная покупка';
+}
+function render(){
+  var arr = loadCodes();
+  var now = Date.now();
+  var week = 7*24*60*60*1000;
+  var list = document.getElementById('list');
+  list.innerHTML='';
+  var shown=0;
+  arr.forEach(function(o){
+    var used = !!o.used;
+    var expired = !used && (now - o.created > week);
+    if(curFilter==='active' && (used||expired)) return;
+    if(curFilter==='used' && !used) return;
+    shown++;
+    var badge, cls;
+    if(used){ badge='Использован'+(o.usedBy?' · '+o.usedBy:''); cls='b-u'; }
+    else if(expired){ badge='Просрочен'; cls='b-e'; }
+    else { badge='Активен'; cls='b-a'; }
+    var d = describe(o) + ' · ' + new Date(o.created).toLocaleDateString('ru-RU');
+    var div = document.createElement('div');
+    div.className='item';
+    div.innerHTML = '<div><div class="c">'+o.code+'</div><div class="d">'+d+'</div></div><div class="badge '+cls+'">'+badge+'</div>';
+    list.appendChild(div);
+  });
+  if(shown===0) list.innerHTML = '<div class="empty">Пока пусто — сгенерируйте первый промокод</div>';
+}
+</script>
+</body>
+</html>
